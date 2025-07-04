@@ -45,7 +45,18 @@ class SinglyLinkedList{
     void printEmptyMessage() const {
         cout << "List is empty!" << endl;
     }
-   
+    void deleteNextNode(Node* prev){
+        if(!prev || !prev->next) return;    // nullchecking
+        Node * nodeToDelete = prev->next;
+        prev->next = nodeToDelete->next;
+
+        // Update tail if we're deleting the last node
+        if(nodeToDelete == tail){   
+            tail = prev; // prev node becomes tail node
+        }
+        delete nodeToDelete;
+        size--;
+    }
     
     public:
     // constructor
@@ -115,7 +126,105 @@ class SinglyLinkedList{
 
 
     // Deletion
-    
+    void deleteFromStart(){
+        if(isEmpty()) {
+            printEmptyMessage();
+            return;
+        }
+        Node * temp = head;
+        head = head->next;
+        delete temp;
+        size--;
+
+        if(size==0) tail = nullptr;
+
+        return;
+    }
+    void deleteFromEnd(){
+        if(isEmpty()) {
+            printEmptyMessage();
+            return;
+        }
+        if(size==1){
+            delete head;
+            head = tail = nullptr;
+            size--;
+            return;
+        }
+        delete tail;
+        Node * prevToLast = getNodeAt(size-2);
+        prevToLast->next =  nullptr;
+        tail = prevToLast;
+        size--;
+    }
+
+    void deleteByValue(int data){
+        if(isEmpty()) {
+            printEmptyMessage();
+            return;
+        }
+        if(head->data == data){     // if data found on 1st node
+            deleteFromStart();
+            return;
+        }
+        Node * curr = head; 
+        // Checking if the next node has matching data
+        while(curr->next){   // traverse until last node
+            if(curr->next->data == data){
+                deleteNextNode(curr);  
+                return;
+            }
+            curr = curr->next;
+        }
+        cout<<"No match found"<<endl;
+    } 
+    void deleteAtPosition(int pos){
+        if(isEmpty()) {
+            printEmptyMessage();
+            return;
+        }
+        if(pos==0){
+            deleteFromStart();
+            return;
+        }        
+        if(pos==static_cast<int>(size)-1){
+            deleteFromEnd();
+            return;
+        }
+        Node * prev = getNodeAt(pos-1);
+        deleteNextNode(prev);  
+    }
+
+    int findPosition(int data)const{
+        Node * curr = head;
+        int pos = 0;
+
+        while(curr){
+            if(curr->data==data) return pos;
+            curr=curr->next;
+            pos++;
+        }
+        return -1;
+    }
+
+    bool contains(int data)const{
+        return findPosition(data)!=-1;
+    }
+
+    void display()const{
+
+        if(isEmpty()){
+            printEmptyMessage();
+            return;
+        }
+        Node * curr =  head;
+        while(curr){
+            cout<<curr->data;
+            if(curr->next) cout<<" -> ";
+            curr = curr->next;
+        }
+        cout<<endl;
+    }
 
     size_t getSize()const {return size;}
 
@@ -137,29 +246,31 @@ class SinglyLinkedList{
     }
 
    
-    // Node* reverseRecursive(Node* head)
-
 
 };
 
 
-int main(){
-    SinglyLinkedList list;
-    list.insertAtEnd(10);
-    list.insertAtEnd(10);
-    list.insertAtEnd(20);
-    list.insertAtEnd(20); 
-    list.insertAtEnd(20);
-    list.insertAtEnd(30);
-    list.insertAtEnd(30);
-    list.insertAtEnd(40);
-    list.insertAtEnd(40);
-    list.insertAtEnd(50);
-    list.insertAtEnd(50);
-    list.insertAtEnd(50);
-    list.insertAtEnd(50);
-   
-    return 0;
-}
+// int main(){
+//     SinglyLinkedList list;
+//     list.insertAtEnd(10);
+//     list.insertAtEnd(10);
+//     list.insertAtEnd(20);
+//     list.insertAtEnd(20); 
+//     list.insertAtEnd(20);
+//     list.insertAtEnd(30);
+//     list.insertAtEnd(30);
+//     list.insertAtEnd(40);
+//     list.insertAtEnd(40);
+//     list.insertAtEnd(50);
+//     list.insertAtEnd(50);
+//     list.insertAtEnd(50);
+//     list.insertAtEnd(50);
+//     list.display();
+    
+//     list.reverseIterative();
+//     list.removeDuplicatesUnsorted();
+//     list.display();
+//     return 0;
+// }
 
 
