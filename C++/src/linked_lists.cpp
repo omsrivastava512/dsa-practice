@@ -245,32 +245,85 @@ class SinglyLinkedList{
         size=0;       
     }
 
-   
+    void removeDuplicatesSorted(){
+        Node * curr = head;
+        while(curr && curr->next){
+            if(curr->data==curr->next->data){
+                deleteNextNode(curr);
+            }
+            else curr= curr->next;
+        }
+    }   
+    void removeDuplicatesUnsorted(){
+        Node*curr = head;
+        while(curr && curr->next){
+            Node*runner = curr;
+            while(runner->next){
+                if(curr->data == runner->next->data) deleteNextNode(runner);
+                else runner = runner->next;
+            }
+            curr = curr->next;
+        }
+    }
+
+    void reverseIterativeUsingNewNode(){
+      
+
+        Node * curr = head;
+        Node * newHead = tail;   // last node
+        tail = head;    // first node becomes last
+        while(curr!=newHead){  
+            Node * newNode = new Node(curr->data);
+            newNode->next = newHead->next;
+            newHead->next = newNode;
+            Node * temp = curr; 
+            curr = curr->next;
+            delete temp;
+        } 
+
+        head = newHead;
+
+    }
+  void reverseIterative(){
+        Node * newHead = tail;   
+        Node * curr = head;
+       while(curr!=newHead){  
+            Node *next = curr->next;
+            curr->next = newHead->next;
+            newHead->next = curr;
+            curr = next;
+        } 
+        tail = head;    // first node becomes tail
+        head = newHead;
+    }
+
+    // Node* reverseRecursive(Node* head)
+
 
 };
 
 
-// int main(){
-//     SinglyLinkedList list;
-//     list.insertAtEnd(10);
-//     list.insertAtEnd(10);
-//     list.insertAtEnd(20);
-//     list.insertAtEnd(20); 
-//     list.insertAtEnd(20);
-//     list.insertAtEnd(30);
-//     list.insertAtEnd(30);
-//     list.insertAtEnd(40);
-//     list.insertAtEnd(40);
-//     list.insertAtEnd(50);
-//     list.insertAtEnd(50);
-//     list.insertAtEnd(50);
-//     list.insertAtEnd(50);
-//     list.display();
+int main(){
+    SinglyLinkedList list;
+    list.insertAtEnd(10);
+    list.insertAtEnd(10);
+    list.insertAtEnd(20);
+    list.insertAtEnd(20); 
+    list.insertAtEnd(20);
+    list.insertAtEnd(30);
+    list.insertAtEnd(30);
+    list.insertAtEnd(40);
+    list.insertAtEnd(40);
+    list.insertAtEnd(50);
+    list.insertAtEnd(50);
+    list.insertAtEnd(50);
+    list.insertAtEnd(50);
+    list.display();
     
-//     list.reverseIterative();
-//     list.removeDuplicatesUnsorted();
-//     list.display();
-//     return 0;
-// }
+    list.reverseIterative();
+    list.removeDuplicatesUnsorted();
+    list.display();
+    return 0;
+}
 
 
