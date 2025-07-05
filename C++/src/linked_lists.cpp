@@ -303,27 +303,27 @@ class SinglyLinkedList{
 };
 
 
-int main(){
-    SinglyLinkedList list;
-    list.insertAtEnd(10);
-    list.insertAtEnd(10);
-    list.insertAtEnd(20);
-    list.insertAtEnd(20); 
-    list.insertAtEnd(20);
-    list.insertAtEnd(30);
-    list.insertAtEnd(30);
-    list.insertAtEnd(40);
-    list.insertAtEnd(40);
-    list.insertAtEnd(50);
-    list.insertAtEnd(50);
-    list.insertAtEnd(50);
-    list.insertAtEnd(50);
-    list.display();
+// int main(){
+//     SinglyLinkedList list;
+//     list.insertAtEnd(10);
+//     list.insertAtEnd(10);
+//     list.insertAtEnd(20);
+//     list.insertAtEnd(20); 
+//     list.insertAtEnd(20);
+//     list.insertAtEnd(30);
+//     list.insertAtEnd(30);
+//     list.insertAtEnd(40);
+//     list.insertAtEnd(40);
+//     list.insertAtEnd(50);
+//     list.insertAtEnd(50);
+//     list.insertAtEnd(50);
+//     list.insertAtEnd(50);
+//     list.display();
     
-    list.reverseIterative();
-    list.removeDuplicatesUnsorted();
-    list.display();
-    return 0;
-}
+//     list.reverseIterative();
+//     list.removeDuplicatesUnsorted();
+//     list.display();
+//     return 0;
+// }
 
 
