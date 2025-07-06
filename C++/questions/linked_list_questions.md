@@ -1,4 +1,5 @@
-## **Phase 2: Linked Lists**
+# Singly
+
 
 ### **Topic 2.1: Singly Linked List Fundamentals**
 
@@ -166,7 +167,7 @@ Node* removeDuplicatesSorted(Node* head);
 Node* removeDuplicatesUnsorted(Node* head);
 ```
 
-### **Topic 2.3: Doubly Linked List**
+#  Doubly Linked List
 
 **Problem 20: Doubly Linked List Implementation**
 ```cpp
@@ -232,7 +233,7 @@ DoublyNode* treeToDoublyList(TreeNode* root);
 DoublyNode* cloneDLLWithRandom(DoublyNode* head);
 ```
 
-### **Topic 2.4: Circular Linked List**
+# Circular Linked List
 
 **Problem 22: Circular Singly Linked List**
 ```cpp
