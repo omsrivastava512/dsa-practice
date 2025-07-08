@@ -64,7 +64,7 @@ private:
 public:
     DoublyLinkedList():head(nullptr), tail(nullptr), size(0){}
     ~DoublyLinkedList(){
-        // clear();
+        clear();
     }
     
     // Operations to implement:
@@ -97,6 +97,104 @@ public:
         }
     }
     
-  
+    void deleteFromBeginning(){
+        if(size==0) return;
+        deleteNode(head);
+    }
+
+    void deleteFromEnd(){
+        if(size==0) return;
+        deleteNode(tail);
+    }
+
+    void deleteByValue(int data){
+        DoublyNode*node = searchNode(data);
+        if(node && node->data==data) return deleteNode(node);
+        else cout<< "Data does not exist."<<endl;
+    }
+
+    void deleteAtPosition(int pos){
+        if(!validatePosition(pos)) return;
+
+        DoublyNode *curr = head;
+        for(int i = 0; i<pos; i++) curr=curr->next;
+        deleteNode(curr);
+    }
+
+    void deleteNode(DoublyNode* node){
+        if(size==0) return ;
+        if(!node) return;
+
+        if(head == node) head = node->next; 
+        else node->prev->next = node->next;
+
+        if(tail == node) tail = node->prev;
+        else node->next->prev = node->prev;
+
+        delete node;
+        size--;
+    }
+    
+    void displayForward()const{
+        if (size==0){
+            cout<<"List is empty"<<endl;
+            return;
+        }
+        cout << "Forward: ";
+        DoublyNode* curr = head;
+        while (curr) {
+            cout << curr->data;
+            if (curr->next) cout << " <-> ";
+            curr = curr->next;
+        }
+        cout << endl;
+    }
+    void displayBackward()const{
+        if (size==0){
+            cout<<"List is empty"<<endl;
+            return;
+        }
+        cout << "Backward: ";
+        DoublyNode* curr = tail;
+        while (curr) {
+            cout << curr->data;
+            if (curr->prev) cout << " <-> ";
+            curr = curr->prev;
+        }
+        cout << endl;
+    }
+
+    DoublyNode* searchNode(int data)const{
+        DoublyNode *curr = head;
+        while(curr && curr->data!=data) curr=curr->next;
+        return curr;
+    }
+
+    DoublyNode* getNode(int pos)const{
+        if(!validatePosition(pos)) return nullptr;
+        DoublyNode* curr;
+        if (pos <= static_cast<int>(size) / 2) {
+            // Traverse from head
+            curr = head;
+            for (int i = 0; i < pos; ++i) {
+                curr = curr->next;
+            }
+        } else {
+            // Traverse from tail
+            curr = tail;
+            for (int i = static_cast<int>(size) - 1; i > pos; --i) {
+                curr = curr->prev;
+            }
+        }
+        return curr;
+    }
+
+    int getSize()const{
+        return static_cast<int>(size);
+    }
+
+    void clear(){
+        while(size>0) deleteNode(head);
+    }
     
 };
