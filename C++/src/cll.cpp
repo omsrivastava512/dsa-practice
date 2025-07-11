@@ -10,6 +10,15 @@ class CircularLinkedList {
     private:
     Node* last; // Points to last node
     int size;
+    
+    /**
+     * Checks whether the postition is non-negative and less than size of the list.
+     * The check-range is exclusive of size and thus any attempts to insert initial node and 
+     * insert at the end must be catered seperately before validating using this function.
+     */
+    bool validatePosition(int pos)const{
+        return !(pos<0  || pos>=size); 
+    }
 
     void insertInitialNode(int data){
         if(size!=0) return;
@@ -19,14 +28,14 @@ class CircularLinkedList {
         size++;
     }
      
-    /**
-     * Checks whether the postition is non-negative and less than size of the list.
-     * The check-range is exclusive of size and thus any attempts to insert initial node and 
-     * insert at the end must be catered seperately before validating using this function.
-     */
-    bool validatePosition(int pos)const{
-        return !(pos<0  || pos>=size); 
+
+    void deleteFinalNode(){
+        if(size!=1) return;
+        delete last;
+        last = nullptr;
+        size = 0;
     }
+
 
 
 public:
@@ -52,7 +61,6 @@ public:
     }
 
     void insertAtEnd(int data){
-        if (size==0) return insertInitialNode(data);
         return insertAfterNode(last, data, true);
     }
 
@@ -68,7 +76,9 @@ public:
     }
     
     void deleteAfterNode(Node*prev){
-        if(!prev || !prev->next) return;
+        if(!prev) return;
+
+        if(size==1) return deleteFinalNode();
 
         Node*temp = prev->next;
         prev->next = temp->next;
@@ -77,15 +87,8 @@ public:
         size--;
     }
     
-    void deleteFinalNode(){
-        if(size!=1) return;
-        delete last;
-        last = nullptr;
-        size = 0;
-    }
-
+  
     void deleteFromBeginning(){
-        if(size==1) return deleteFinalNode();
         deleteAfterNode(last);
     }
 
@@ -99,29 +102,58 @@ public:
     }
 
     void deleteByValue(int data){
-        
-        Node*curr = last->next;
-        while(curr->next->data!=data && curr->next!=last) curr=curr->next;
+        if(size==0) return;
 
-        if(curr->next->data==data) deleteAfterNode(curr);
-        else cout<<"Data does not exist in the list.";
+        Node*curr = last;
+        for(int i = 0; i<size; i++){
+            if(curr->next->data==data) return deleteAfterNode(curr);
+            curr=curr->next;
+        }
+        cout<<"Data does not exist in the list.";
     }
     
-    void display()const;
+    void display()const{
+        if(size==0){
+            cout<<"List is empty.";
+            return;
+        } 
+
+        Node*curr = last->next;
+        for(int i = 0; i<size; i++){
+            cout<<curr->data;
+            if(curr!=last) cout<<" -> ";
+        }
+        cout<<endl;
+            
+        
+    }
 
     Node* searchNode(int data)const{
-        Node*curr = last->next;
-        while(curr->data!=data && curr!=last) curr=curr->next;  
+        if(size==0) return nullptr;
 
-        return (curr->data==data)? curr : nullptr;
+        Node*curr = last;
+        for(int i = 0; i<size; i++){
+            if(curr->next->data==data) return (curr);
+            curr=curr->next;
+        }
+        return nullptr;
     }
 
     int getSize()const{return size;}
     
 
-    void clear();
+    void clear(){
+        while(size>0) deleteAfterNode(last);
+    }
     
-    // Special operations:
-    void splitIntoTwo(CircularLinkedList& list1, CircularLinkedList& list2);
-    bool isCircular();
+     
+    bool isCircular(){
+        if(size == 0) return true;
+
+        Node* curr = last->next;
+        for (int i = 0; i < size; i++) {
+            curr = curr->next;
+        }
+        return curr == last->next; // Should return to start        
+    }
 };
