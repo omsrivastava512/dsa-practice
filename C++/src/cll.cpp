@@ -61,6 +61,7 @@ public:
     }
 
     void insertAtEnd(int data){
+        if(size==0) return insertInitialNode(data);
         return insertAfterNode(last, data, true);
     }
 
@@ -114,7 +115,7 @@ public:
     
     void display()const{
         if(size==0){
-            cout<<"List is empty.";
+            cout<<"List is empty."<<endl;
             return;
         } 
 
