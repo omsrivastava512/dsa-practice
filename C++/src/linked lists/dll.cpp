@@ -35,7 +35,9 @@ private:
         DoublyNode *newNode = new DoublyNode(data);
         newNode->prev = prev;
         newNode->next = prev->next;
+        prev->next->prev = newNode;
         prev->next = newNode;
+
         ++size;
 
         if(tail==prev) tail = newNode;
@@ -46,6 +48,7 @@ private:
         DoublyNode *newNode = new DoublyNode(data);
         newNode->next = next;
         newNode->prev = next->prev;
+        next->prev->next = newNode;
         next->prev = newNode;
         size++;
 
