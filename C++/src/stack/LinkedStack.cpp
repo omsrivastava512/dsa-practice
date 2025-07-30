@@ -49,7 +49,7 @@ public:
         }
         return top->data;
     }
-    bool isEmpty()const{ return new bool(top);}
+    bool isEmpty()const{ return top == nullptr;}
     int size()const {return count;}
 
     void display()const{
