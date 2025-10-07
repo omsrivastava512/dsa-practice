@@ -1,20 +1,20 @@
-# DSA Practice Repository
+# DSA Fundamentals Learning Repository
 
-This repository is designed for practicing Data Structures and Algorithms (DSA). It contains various coding questions that help in enhancing problem-solving skills and understanding of algorithmic concepts.
+This repository is focused on the fundamentals of Data Structures and Algorithms (DSA), providing practical implementations and insights into various topics. It covers:
 
-## Purpose
-The primary goal of this repository is to provide a structured way to practice DSA problems, allowing users to explore different algorithms and data structures through hands-on coding.
+- **Arrays**
+- **Linked Lists**
+- **Stacks**
+- **Queues**
+- **Trees**
+- **Graphs**
+- **Memory Management**
+- **File Structures**
 
-## File Structure
-The repository is organized into the following main folders:
+### Topic-Based Organization
 
-- **questions/**: This folder contains individual question files. Each question is represented by a separate file that outlines the problem statement, constraints, and examples.
-- **src/**: This folder contains the corresponding solution files for each question. Each question file in the `questions/` folder has a matching folder in the `src/` directory, which includes multiple solutions in various programming languages or implementations.
+In the `questions` folder, you will find multiple questions categorized by topic. Each topic has its own subfolder containing:
+- A set of questions related to that particular topic.
+- Corresponding `src` folders which include individual solution files for each question.
 
-### Question and Source Connection
-For each question in the `questions/` folder, there is a dedicated folder in the `src/` directory. Inside each corresponding folder, you may find:
-- Different approaches to solve the question.
-- Solutions in multiple programming languages (if applicable).
-- Tests or example runs demonstrating the solutions.
-
-This structure allows for easy navigation between questions and their solutions, promoting a better learning experience.
+This structure is designed to facilitate learning and provide a hands-on approach to mastering DSA concepts.
